@@ -1,7 +1,6 @@
-package bookstore.repositories.bookRepository;
+package bookstore.repositories.bookrepository;
 
 import bookstore.models.Book;
-
 import java.util.List;
 import java.util.Optional;
 

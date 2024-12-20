@@ -1,14 +1,13 @@
-package bookstore.services.bookService;
+package bookstore.services.bookservice;
 
 import bookstore.dtos.book.BookDto;
 import bookstore.dtos.book.CreateBookRequestDto;
 import bookstore.exceptions.EntityNotFoundException;
 import bookstore.mappers.book.IBookMapper;
-import bookstore.repositories.bookRepository.IBookRepository;
+import bookstore.repositories.bookrepository.IBookRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
