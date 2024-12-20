@@ -49,7 +49,6 @@ public class BookRepository implements IBookRepository {
         }
     }
 
-
     @Override
     public Optional<Book> findById(Long id) {
         try (Session session = sessionFactory.openSession()) {
