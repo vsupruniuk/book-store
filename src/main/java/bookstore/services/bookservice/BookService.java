@@ -4,6 +4,7 @@ import bookstore.dtos.book.BookDto;
 import bookstore.dtos.book.BookSearchParamsDto;
 import bookstore.dtos.book.CreateUpdateBookRequestDto;
 import bookstore.exceptions.EntityNotFoundException;
+import bookstore.exceptions.IsbnConflictException;
 import bookstore.mappers.book.IBookMapper;
 import bookstore.models.Book;
 import bookstore.repositories.ISpecificationBuilder;
@@ -23,6 +24,15 @@ public class BookService implements IBookService {
 
     @Override
     public BookDto save(CreateUpdateBookRequestDto createUpdateBookRequestDto) {
+        Book book = bookRepository.findByIsbn(createUpdateBookRequestDto.getIsbn());
+
+        if (book != null) {
+            throw new IsbnConflictException(
+                    "Book with ISBN %s already exist"
+                            .formatted(createUpdateBookRequestDto.getIsbn())
+            );
+        }
+
         return bookMapper.toDto(
                 bookRepository.save(
                         bookMapper.toEntity(createUpdateBookRequestDto)
@@ -56,7 +66,7 @@ public class BookService implements IBookService {
                 .findById(id)
                 .map(bookMapper::toDto)
                 .orElseThrow(() -> new EntityNotFoundException(
-                        "Entity with id %d not found".formatted(id)
+                        "Book with id %d not found".formatted(id)
                 ));
     }
 
@@ -65,7 +75,7 @@ public class BookService implements IBookService {
         Book book = bookRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(
-                        "Entity with id %d not found".formatted(id)
+                        "Book with id %d not found".formatted(id)
                 ));
 
         bookMapper.updateBookFromDto(book, createUpdateBookRequestDto);
