@@ -1,19 +1,23 @@
 package bookstore.services.bookservice;
 
 import bookstore.dtos.book.BookDto;
+import bookstore.dtos.book.BookSearchParamsDto;
 import bookstore.dtos.book.CreateUpdateBookRequestDto;
 import bookstore.exceptions.EntityNotFoundException;
 import bookstore.mappers.book.IBookMapper;
 import bookstore.models.Book;
+import bookstore.repositories.ISpecificationBuilder;
 import bookstore.repositories.bookrepository.IBookRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class BookService implements IBookService {
     private final IBookRepository bookRepository;
+    private final ISpecificationBuilder<Book> bookSpecificationBuilder;
 
     private final IBookMapper bookMapper;
 
@@ -30,6 +34,17 @@ public class BookService implements IBookService {
     public List<BookDto> findAll() {
         return bookRepository
                 .findAll()
+                .stream()
+                .map(bookMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<BookDto> search(BookSearchParamsDto bookSearchParamsDto) {
+        Specification<Book> specification = bookSpecificationBuilder.build(bookSearchParamsDto);
+
+        return bookRepository
+                .findAll(specification)
                 .stream()
                 .map(bookMapper::toDto)
                 .toList();
@@ -53,18 +68,15 @@ public class BookService implements IBookService {
                         "Entity with id %d not found".formatted(id)
                 ));
 
-        book.setTitle(createUpdateBookRequestDto.getTitle());
-        book.setAuthor(createUpdateBookRequestDto.getAuthor());
-        book.setIsbn(createUpdateBookRequestDto.getIsbn());
-        book.setPrice(createUpdateBookRequestDto.getPrice());
-        book.setDescription(createUpdateBookRequestDto.getDescription());
-        book.setCoverImage(createUpdateBookRequestDto.getCoverImage());
+        bookMapper.updateBookFromDto(book, createUpdateBookRequestDto);
 
         return bookMapper.toDto(bookRepository.save(book));
     }
 
     @Override
     public void delete(Long id) {
+        findById(id);
+
         bookRepository.deleteById(id);
     }
 }
