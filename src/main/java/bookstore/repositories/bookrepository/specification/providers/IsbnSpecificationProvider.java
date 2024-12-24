@@ -15,7 +15,7 @@ public class IsbnSpecificationProvider implements ISpecificationProvider<Book> {
     public Specification<Book> getSpecification(String param) {
         return (root, query, criteriaBuilder) -> criteriaBuilder
                 .like(
-                        criteriaBuilder.lower(root.get("isbn")),
+                        criteriaBuilder.lower(root.get(SpecificationKey.ISBN.getKey())),
                         "%" + param.toLowerCase() + "%"
                 );
     }
