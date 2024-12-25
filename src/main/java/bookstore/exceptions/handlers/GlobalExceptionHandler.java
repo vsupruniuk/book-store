@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleValidationException(
             MethodArgumentNotValidException ex
     ) {
-        return getSimpleException(
+        return getSimpleResponse(
                 HttpStatus.BAD_REQUEST,
                 ex
                     .getBindingResult()
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFoundEntity(EntityNotFoundException ex) {
-        return getSimpleException(
+        return getSimpleResponse(
                 HttpStatus.NOT_FOUND,
                 List.of(ex.getMessage())
         );
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleIsbnConflictException(
             IsbnConflictException ex
     ) {
-        return getSimpleException(
+        return getSimpleResponse(
                 HttpStatus.CONFLICT,
                 List.of(ex.getMessage())
         );
@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleAllException() {
-        return getSimpleException(
+        return getSimpleResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 List.of(INTERNAL_SERVER_ERROR_MSG)
         );
@@ -68,7 +68,7 @@ public class GlobalExceptionHandler {
         return body;
     }
 
-    private ResponseEntity<Map<String, Object>> getSimpleException(
+    private ResponseEntity<Map<String, Object>> getSimpleResponse(
             HttpStatus status,
             List<String> errors
     ) {
