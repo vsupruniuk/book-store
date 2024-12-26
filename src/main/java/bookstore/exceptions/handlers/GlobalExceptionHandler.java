@@ -50,14 +50,6 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleAllException() {
-        return getSimpleResponse(
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                List.of(INTERNAL_SERVER_ERROR_MSG)
-        );
-    }
-
     private Map<String, Object> getResponseBody(HttpStatus status, List<String> errors) {
         Map<String, Object> body = new LinkedHashMap<>();
 
