@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import bookstore.exceptions.RegistrationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +43,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IsbnConflictException.class)
     public ResponseEntity<Map<String, Object>> handleIsbnConflictException(
             IsbnConflictException ex
+    ) {
+        return getSimpleResponse(
+                HttpStatus.CONFLICT,
+                List.of(ex.getMessage())
+        );
+    }
+
+    @ExceptionHandler(RegistrationException.class)
+    public ResponseEntity<Map<String, Object>> handleRegistrationException(
+            RegistrationException ex
     ) {
         return getSimpleResponse(
                 HttpStatus.CONFLICT,
