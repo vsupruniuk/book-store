@@ -7,8 +7,8 @@ import bookstore.services.bookservice.IBookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +30,7 @@ public class BookController {
 
     @Operation(description = "Get all books")
     @GetMapping
-    public List<BookDto> getAll(Pageable pageable) {
+    public Page<BookDto> getAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
@@ -42,7 +42,7 @@ public class BookController {
 
     @Operation(description = "Search books by some parameters")
     @GetMapping("/search")
-    public List<BookDto> searchBooks(Pageable pageable, BookSearchParamsDto bookSearchParamsDto) {
+    public Page<BookDto> searchBooks(Pageable pageable, BookSearchParamsDto bookSearchParamsDto) {
         return bookService.search(pageable, bookSearchParamsDto);
     }
 

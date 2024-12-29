@@ -2,12 +2,11 @@ package bookstore.exceptions.handlers;
 
 import bookstore.exceptions.EntityNotFoundException;
 import bookstore.exceptions.IsbnConflictException;
+import bookstore.exceptions.RegistrationException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import bookstore.exceptions.RegistrationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
