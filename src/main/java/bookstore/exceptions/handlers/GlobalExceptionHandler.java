@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    private static final String INTERNAL_SERVER_ERROR_MSG = "Unexpected error occurred";
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidationException(
             MethodArgumentNotValidException ex
@@ -47,14 +45,6 @@ public class GlobalExceptionHandler {
         return getSimpleResponse(
                 HttpStatus.CONFLICT,
                 List.of(ex.getMessage())
-        );
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleAllException() {
-        return getSimpleResponse(
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                List.of(INTERNAL_SERVER_ERROR_MSG)
         );
     }
 
