@@ -22,9 +22,7 @@ public class AuthController {
     @Operation(description = "Register in the app")
     @PostMapping("/registration")
     public UserResponseDto registration(
-            @RequestBody
-            @Valid
-            UserRegistrationRequestDto userRegistrationRequestDto
+            @RequestBody @Valid UserRegistrationRequestDto userRegistrationRequestDto
     ) {
         return authService.register(userRegistrationRequestDto);
     }

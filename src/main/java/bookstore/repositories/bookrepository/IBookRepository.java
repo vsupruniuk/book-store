@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 public interface IBookRepository extends
         JpaRepository<Book, Long>,
         JpaSpecificationExecutor<Book> {
-    Book findByIsbn(String isbn);
+    boolean existsByIsbn(String isbn);
 }
