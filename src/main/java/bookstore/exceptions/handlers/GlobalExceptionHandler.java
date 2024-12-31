@@ -2,6 +2,7 @@ package bookstore.exceptions.handlers;
 
 import bookstore.exceptions.EntityNotFoundException;
 import bookstore.exceptions.IsbnConflictException;
+import bookstore.exceptions.RegistrationException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -41,6 +42,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IsbnConflictException.class)
     public ResponseEntity<Map<String, Object>> handleIsbnConflictException(
             IsbnConflictException ex
+    ) {
+        return getSimpleResponse(
+                HttpStatus.CONFLICT,
+                List.of(ex.getMessage())
+        );
+    }
+
+    @ExceptionHandler(RegistrationException.class)
+    public ResponseEntity<Map<String, Object>> handleRegistrationException(
+            RegistrationException ex
     ) {
         return getSimpleResponse(
                 HttpStatus.CONFLICT,
