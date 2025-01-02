@@ -1,5 +1,7 @@
 package bookstore.controllers;
 
+import bookstore.dtos.user.UserLoginRequestDto;
+import bookstore.dtos.user.UserLoginResponseDto;
 import bookstore.dtos.user.UserRegistrationRequestDto;
 import bookstore.dtos.user.UserResponseDto;
 import bookstore.services.authservice.IAuthService;
@@ -25,5 +27,13 @@ public class AuthController {
             @RequestBody @Valid UserRegistrationRequestDto userRegistrationRequestDto
     ) {
         return authService.register(userRegistrationRequestDto);
+    }
+
+    @Operation(description = "Login in the app")
+    @PostMapping("/login")
+    public UserLoginResponseDto login(
+            @RequestBody @Valid UserLoginRequestDto userLoginRequestDto
+    ) {
+        return authService.authenticate(userLoginRequestDto);
     }
 }
