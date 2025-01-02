@@ -26,9 +26,7 @@ public class AuthService implements IAuthService {
 
     @Override
     public UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto) {
-        boolean isUserExist = userRepository.existsByEmail(userRegistrationRequestDto.getEmail());
-
-        if (isUserExist) {
+        if (userRepository.existsByEmail(userRegistrationRequestDto.getEmail())) {
             throw new RegistrationException("This email is already taken");
         }
 
