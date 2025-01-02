@@ -20,14 +20,13 @@ import org.springframework.stereotype.Service;
 public class BookService implements IBookService {
     private final IBookRepository bookRepository;
     private final ISpecificationBuilder<Book> bookSpecificationBuilder;
-
     private final IBookMapper bookMapper;
 
     @Override
     public BookDto save(CreateUpdateBookRequestDto createUpdateBookRequestDto) {
-        Book book = bookRepository.findByIsbn(createUpdateBookRequestDto.getIsbn());
+        boolean isBookExist = bookRepository.existsByIsbn(createUpdateBookRequestDto.getIsbn());
 
-        if (book != null) {
+        if (isBookExist) {
             throw new IsbnConflictException(
                     "Book with ISBN %s already exist"
                             .formatted(createUpdateBookRequestDto.getIsbn())
