@@ -1,6 +1,7 @@
 package bookstore.services.bookservice;
 
 import bookstore.dtos.book.BookDto;
+import bookstore.dtos.book.BookDtoWithoutCategoryIds;
 import bookstore.dtos.book.BookSearchParamsDto;
 import bookstore.dtos.book.CreateUpdateBookRequestDto;
 import bookstore.exceptions.EntityNotFoundException;
@@ -43,8 +44,15 @@ public class BookService implements IBookService {
     @Override
     public Page<BookDto> findAll(Pageable pageable) {
         return bookRepository
-                .findAll(pageable)
+                .findAllWithCategories(pageable)
                 .map(bookMapper::toDto);
+    }
+
+    @Override
+    public Page<BookDtoWithoutCategoryIds> findAllByCategoryId(Pageable pageable, Long id) {
+        return bookRepository
+                .findAllByCategoryId(id, pageable)
+                .map(bookMapper::toDtoWithoutCategories);
     }
 
     @Override

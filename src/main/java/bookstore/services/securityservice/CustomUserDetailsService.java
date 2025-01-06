@@ -1,4 +1,4 @@
-package bookstore.services.security;
+package bookstore.services.securityservice;
 
 import bookstore.repositories.userrepository.IUserRepository;
 import lombok.RequiredArgsConstructor;
