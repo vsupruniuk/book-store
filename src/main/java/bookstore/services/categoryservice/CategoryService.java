@@ -5,7 +5,7 @@ import bookstore.dtos.category.CreateUpdateCategoryRequestDto;
 import bookstore.exceptions.EntityNotFoundException;
 import bookstore.mappers.category.ICategoryMapper;
 import bookstore.models.Category;
-import bookstore.repositories.ICategoryRepository;
+import bookstore.repositories.categoryrepository.ICategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

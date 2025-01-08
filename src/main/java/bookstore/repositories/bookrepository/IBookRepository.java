@@ -7,10 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.lang.NonNull;
 
 public interface IBookRepository extends
         JpaRepository<Book, Long>,
         JpaSpecificationExecutor<Book> {
+    boolean existsById(@NonNull Long id);
+
     boolean existsByIsbn(String isbn);
 
     @Query("FROM Book book LEFT JOIN FETCH book.categories")

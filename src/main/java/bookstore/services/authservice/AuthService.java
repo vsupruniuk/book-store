@@ -5,7 +5,11 @@ import bookstore.dtos.user.UserLoginResponseDto;
 import bookstore.dtos.user.UserRegistrationRequestDto;
 import bookstore.dtos.user.UserResponseDto;
 import bookstore.exceptions.RegistrationException;
+import bookstore.mappers.shoppingcart.IShoppingCartMapper;
 import bookstore.mappers.user.IUserMapper;
+import bookstore.models.ShoppingCart;
+import bookstore.models.User;
+import bookstore.repositories.shoppingcartrepository.IShoppingCartRepository;
 import bookstore.repositories.userrepository.IUserRepository;
 import bookstore.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -14,16 +18,22 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
 public class AuthService implements IAuthService {
     private final IUserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final IShoppingCartRepository shoppingCartRepository;
+
+    private final IShoppingCartMapper shoppingCartMapper;
     private final IUserMapper userMapper;
+
     private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
+    @Transactional
     @Override
     public UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto) {
         if (userRepository.existsByEmail(userRegistrationRequestDto.getEmail())) {
@@ -34,11 +44,15 @@ public class AuthService implements IAuthService {
                 passwordEncoder.encode(userRegistrationRequestDto.getPassword())
         );
 
-        return userMapper.toResponseDto(
-                userRepository.save(
-                        userMapper.toEntity(userRegistrationRequestDto)
-                )
+        User user = userRepository.save(
+                userMapper.toEntity(userRegistrationRequestDto)
         );
+
+        ShoppingCart shoppingCart = shoppingCartMapper.toEntity(user);
+
+        shoppingCartRepository.save(shoppingCart);
+
+        return userMapper.toResponseDto(user);
     }
 
     @Override
