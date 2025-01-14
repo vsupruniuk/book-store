@@ -50,7 +50,7 @@ public class Book {
 
     private String coverImage;
 
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(
             name = "books_categories",
             joinColumns = @JoinColumn(name = "book_id"),

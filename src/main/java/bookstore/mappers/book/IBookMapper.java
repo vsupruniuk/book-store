@@ -46,7 +46,7 @@ public interface IBookMapper {
                 .getCategories()
                 .stream()
                 .map(Category::new)
-                .collect(Collectors.toList());
+                .toList();
 
         book.setCategories(categories);
     }
