@@ -4,7 +4,7 @@ import bookstore.dtos.user.UserLoginRequestDto;
 import bookstore.dtos.user.UserLoginResponseDto;
 import bookstore.dtos.user.UserRegistrationRequestDto;
 import bookstore.dtos.user.UserResponseDto;
-import bookstore.services.authservice.IAuthService;
+import bookstore.services.auth.IAuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
