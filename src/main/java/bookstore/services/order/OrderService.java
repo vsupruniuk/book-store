@@ -1,4 +1,4 @@
-package bookstore.services.orderservice;
+package bookstore.services.order;
 
 import bookstore.dtos.order.OrderDto;
 import bookstore.dtos.order.PlaceOrderDto;
@@ -11,9 +11,9 @@ import bookstore.models.Order;
 import bookstore.models.OrderItem;
 import bookstore.models.ShoppingCart;
 import bookstore.models.User;
-import bookstore.repositories.cartitemrepository.ICartItemRepository;
-import bookstore.repositories.orderrepository.IOrderRepository;
-import bookstore.repositories.shoppingcartrepository.IShoppingCartRepository;
+import bookstore.repositories.cartitem.ICartItemRepository;
+import bookstore.repositories.order.IOrderRepository;
+import bookstore.repositories.shoppingcart.IShoppingCartRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -1,9 +1,9 @@
-package bookstore.services.orderitemservice;
+package bookstore.services.orderitem;
 
 import bookstore.dtos.orderitems.OrderItemDto;
 import bookstore.exceptions.EntityNotFoundException;
 import bookstore.mappers.orderitem.IOrderItemMapper;
-import bookstore.repositories.orderitemrepository.IOrderItemRepository;
+import bookstore.repositories.orderitem.IOrderItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

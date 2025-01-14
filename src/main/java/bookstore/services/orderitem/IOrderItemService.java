@@ -1,4 +1,4 @@
-package bookstore.services.orderitemservice;
+package bookstore.services.orderitem;
 
 import bookstore.dtos.orderitems.OrderItemDto;
 import org.springframework.data.domain.Page;

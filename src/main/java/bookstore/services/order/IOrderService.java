@@ -1,4 +1,4 @@
-package bookstore.services.orderservice;
+package bookstore.services.order;
 
 import bookstore.dtos.order.OrderDto;
 import bookstore.dtos.order.PlaceOrderDto;
