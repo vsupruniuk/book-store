@@ -7,11 +7,13 @@ import bookstore.dtos.book.CreateUpdateBookRequestDto;
 import bookstore.models.Book;
 import bookstore.models.Category;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 
 @Mapper(config = MapperConfig.class)
 public interface IBookMapper {
@@ -49,5 +51,13 @@ public interface IBookMapper {
                 .toList();
 
         book.setCategories(categories);
+    }
+
+    @Named("bookFromId")
+    default Book bookFromId(Long id) {
+        return Optional
+                .ofNullable(id)
+                .map(Book::new)
+                .orElse(null);
     }
 }
