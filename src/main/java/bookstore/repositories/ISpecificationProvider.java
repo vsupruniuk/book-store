@@ -1,6 +1,6 @@
 package bookstore.repositories;
 
-import bookstore.repositories.bookrepository.specification.SpecificationKey;
+import bookstore.repositories.book.specification.SpecificationKey;
 import org.springframework.data.jpa.domain.Specification;
 
 public interface ISpecificationProvider<T> {

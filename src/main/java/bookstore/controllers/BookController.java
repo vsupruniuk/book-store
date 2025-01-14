@@ -3,7 +3,7 @@ package bookstore.controllers;
 import bookstore.dtos.book.BookDto;
 import bookstore.dtos.book.BookSearchParamsDto;
 import bookstore.dtos.book.CreateUpdateBookRequestDto;
-import bookstore.services.bookservice.IBookService;
+import bookstore.services.book.IBookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
