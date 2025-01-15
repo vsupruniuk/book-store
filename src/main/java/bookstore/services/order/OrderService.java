@@ -61,12 +61,6 @@ public class OrderService implements IOrderService {
                 )
         );
 
-        System.out.println(shoppingCart
-                .getCartItems()
-                .stream()
-                .map(CartItem::getId)
-                .toList());
-
         cartItemRepository
                 .softDeleteAllById(
                         shoppingCart

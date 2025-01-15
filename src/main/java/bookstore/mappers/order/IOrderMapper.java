@@ -7,7 +7,6 @@ import bookstore.models.Order;
 import bookstore.models.OrderItem;
 import bookstore.models.User;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -19,7 +18,6 @@ public interface IOrderMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "total", ignore = true)
-    @Mapping(target = "orderDate", ignore = true)
     @Mapping(target = "user", source = "user")
     @Mapping(target = "orderItems", source = "orderItems")
     @Mapping(target = "shippingAddress", source = "shippingAddress")
@@ -49,11 +47,6 @@ public interface IOrderMapper {
                                 ))
                         .reduce(BigDecimal.ZERO, BigDecimal::add)
         );
-    }
-
-    @AfterMapping
-    default void setOrderDate(@MappingTarget Order order) {
-        order.setOrderDate(LocalDateTime.now());
     }
 
     @AfterMapping
